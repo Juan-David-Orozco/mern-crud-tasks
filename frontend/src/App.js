@@ -1,5 +1,5 @@
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css'
+//import 'bootstrap/dist/css/bootstrap.min.css'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 import Navigation from './components/Navigation'
@@ -13,7 +13,7 @@ function App() {
   return (
     <Router>
       <Navigation />
-      <div className="container p-4">
+      <div>
         <Route path="/" exact component={NotesList} />
         <Route path="/edit/:id" component={CreateNote} />
         <Route path="/create" component={CreateNote} />
