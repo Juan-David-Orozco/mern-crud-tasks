@@ -23,16 +23,16 @@ export default class CreateNote extends Component {
     });
     if(this.props.match.params.id){
       const res = await axios.get('http://localhost:4000/api/notes/' + this.props.match.params.id)
+      console.log(res.data)
       this.setState({
         title: res.data.title,
         content: res.data.content,
         date: new Date(res.data.date),
         userSelected: res.data.author,
-        editing: true,
-        _id: res.data._id
-      })
+        _id: res.data._id,
+        editing: true
+      });
     }
-    //console.log(this.state.users)
   }
 
   onSubmit = async (e) => {
@@ -61,7 +61,6 @@ export default class CreateNote extends Component {
     this.setState({date})
   }
 
-
   render() {
     return (
       <div className="col-md-6 mx-auto">
@@ -72,7 +71,7 @@ export default class CreateNote extends Component {
           <div className="form-group">
             <select
               className='form-control'
-              name="UserSelected"
+              name="userSelected"
               onChange={this.onInputChange}
               value={this.state.userSelected}
               required
