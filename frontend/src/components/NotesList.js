@@ -17,11 +17,17 @@ export default class NotesList extends Component {
   getNotes = async () => {
     const res = await axios.get('http://localhost:4000/api/notes')
     this.setState({notes: res.data});
+    console.log(res)
+    console.log(this.state.notes)
   }
 
   deleteNote = async (noteId) => {
-    await axios.delete(`http://localhost:4000/api/notes/${noteId}`);
-    this.getNotes();
+    const stringConfirm = `Do you want to delete the noteId: ${noteId}?`
+    const response = window.confirm(stringConfirm);
+    if (response) {
+      await axios.delete(`http://localhost:4000/api/notes/${noteId}`);
+      this.getNotes();
+    }
   }
 
   render() {

@@ -30,11 +30,12 @@ notesCtrl.deleteNote = async (req, res) => {
 }
 
 notesCtrl.updateNote = async (req, res) => {
-    const { title, content, duration, date, author } = req.body;
+    const { title, content, date, author } = req.body;
     await Note.findByIdAndUpdate(req.params.id, {
         title,
         content,
-        duration,
+        //duration,
+        date,
         author
     });
     res.json('Note Updated');

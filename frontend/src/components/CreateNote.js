@@ -17,13 +17,14 @@ export default class CreateNote extends Component {
 
   async componentDidMount() {
     const res = await axios.get('http://localhost:4000/api/users')
+    console.log(res)
     this.setState({
       users: res.data.map(user => user.username),
       userSelected: res.data[0].username
     });
     if(this.props.match.params.id){
       const res = await axios.get('http://localhost:4000/api/notes/' + this.props.match.params.id)
-      console.log(res.data)
+      console.log(res)
       this.setState({
         title: res.data.title,
         content: res.data.content,

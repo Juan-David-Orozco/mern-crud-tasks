@@ -15,11 +15,12 @@ export default class CreateUser extends Component {
   getUsers = async () => {
     const res = await axios.get('http://localhost:4000/api/users')
     this.setState({users: res.data});
+    console.log(res)
+    console.log(this.state.users)
   }
 
   onChangeUsername = e => {
     this.setState({username: e.target.value})
-    //console.log(e.target.value)
   }
 
   onSubmit = async (e) => {
@@ -31,16 +32,15 @@ export default class CreateUser extends Component {
     this.getUsers()
   }
 
-  deleteUser = async (userId) => {
-    await axios.delete(`http://localhost:4000/api/users/${userId}`);
-    this.getUsers()
-    /*
-    const response = window.confirm('are you sure you want to delete it?');
+  deleteUser = async (user) => {
+    // await axios.delete(`http://localhost:4000/api/users/${userId}`);
+    // this.getUsers()
+    const stringConfirm = `are you sure you want to delete the user: ${user.username}`
+    const response = window.confirm(stringConfirm);
     if (response) {
-        await axios.delete('http://localhost:4000/api/users/' + userId);
-        this.getUsers();
+      await axios.delete('http://localhost:4000/api/users/' + user._id);
+      this.getUsers();
     }
-    */
   }
 
   render() {
@@ -69,7 +69,7 @@ export default class CreateUser extends Component {
                 (<li
                   className="list-group-item list-group-item-action"
                   key={user._id}
-                  onDoubleClick={() => this.deleteUser(user._id)}
+                  onDoubleClick={() => this.deleteUser(user)}
                   >
                   {user.username}
                 </li>)
